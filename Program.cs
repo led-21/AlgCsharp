@@ -127,8 +127,8 @@ namespace DSACodeInterview
     public class ListNode
     {
         public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
+        public ListNode? next;
+        public ListNode(int val = 0, ListNode? next = null)
         {
             this.val = val;
             this.next = next;
@@ -138,14 +138,14 @@ namespace DSACodeInterview
     public class LinkedListProblems
     {
         // Reverse Linked List - O(n) time, O(1) space
-        public ListNode ReverseList(ListNode head)
+        public ListNode? ReverseList(ListNode? head)
         {
-            ListNode prev = null;
-            ListNode current = head;
+            ListNode? prev = null;
+            ListNode? current = head;
 
             while (current != null)
             {
-                ListNode next = current.next;
+                ListNode? next = current.next;
                 current.next = prev;
                 prev = current;
                 current = next;
@@ -154,7 +154,7 @@ namespace DSACodeInterview
         }
 
         // Merge Two Sorted Lists - O(n + m) time, O(1) space
-        public ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        public ListNode? MergeTwoLists(ListNode? list1, ListNode? list2)
         {
             var dummy = new ListNode(0);
             var current = dummy;
@@ -183,38 +183,38 @@ namespace DSACodeInterview
         {
             if (head == null || head.next == null) return false;
 
-            ListNode slow = head;
-            ListNode fast = head.next;
+            ListNode? slow = head;
+            ListNode? fast = head.next;
 
             while (slow != fast)
             {
                 if (fast == null || fast.next == null) return false;
-                slow = slow.next;
-                fast = fast.next.next;
+                slow = slow?.next;
+                fast = fast?.next?.next;
             }
             return true;
         }
 
         // Remove Nth Node From End - O(n) time, O(1) space
-        public ListNode RemoveNthFromEnd(ListNode head, int n)
+        public ListNode? RemoveNthFromEnd(ListNode? head, int n)
         {
             var dummy = new ListNode(0) { next = head };
-            ListNode fast = dummy;
-            ListNode slow = dummy;
+            ListNode? fast = dummy;
+            ListNode? slow = dummy;
 
             // Move fast n+1 steps ahead
             for (int i = 0; i <= n; i++)
-                fast = fast.next;
+                fast = fast?.next;
 
             // Move both pointers until fast reaches end
             while (fast != null)
             {
-                fast = fast.next;
-                slow = slow.next;
+                fast = fast?.next;
+                slow = slow?.next;
             }
 
             // Remove the nth node
-            slow.next = slow.next.next;
+            slow!.next = slow!.next?.next;
             return dummy.next;
         }
     }
@@ -223,9 +223,9 @@ namespace DSACodeInterview
     public class TreeNode
     {
         public int val;
-        public TreeNode left;
-        public TreeNode right;
-        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+        public TreeNode? left;
+        public TreeNode? right;
+        public TreeNode(int val = 0, TreeNode? left = null, TreeNode? right = null)
         {
             this.val = val;
             this.left = left;
@@ -236,14 +236,14 @@ namespace DSACodeInterview
     public class TreeProblems
     {
         // Maximum Depth of Binary Tree - O(n) time, O(h) space
-        public int MaxDepth(TreeNode root)
+        public int MaxDepth(TreeNode? root)
         {
             if (root == null) return 0;
             return 1 + Math.Max(MaxDepth(root.left), MaxDepth(root.right));
         }
 
         // Same Tree - O(n) time, O(h) space
-        public bool IsSameTree(TreeNode p, TreeNode q)
+        public bool IsSameTree(TreeNode? p, TreeNode? q)
         {
             if (p == null && q == null) return true;
             if (p == null || q == null) return false;
@@ -251,11 +251,11 @@ namespace DSACodeInterview
         }
 
         // Invert Binary Tree - O(n) time, O(h) space
-        public TreeNode InvertTree(TreeNode root)
+        public TreeNode? InvertTree(TreeNode? root)
         {
             if (root == null) return null;
 
-            TreeNode temp = root.left;
+            TreeNode? temp = root.left;
             root.left = InvertTree(root.right);
             root.right = InvertTree(temp);
 
@@ -270,7 +270,7 @@ namespace DSACodeInterview
             return result;
         }
 
-        private void InorderHelper(TreeNode node, List<int> result)
+        private void InorderHelper(TreeNode? node, List<int> result)
         {
             if (node == null) return;
             InorderHelper(node.left, result);
@@ -284,7 +284,7 @@ namespace DSACodeInterview
             return IsValidBSTHelper(root, long.MinValue, long.MaxValue);
         }
 
-        private bool IsValidBSTHelper(TreeNode node, long minVal, long maxVal)
+        private bool IsValidBSTHelper(TreeNode? node, long minVal, long maxVal)
         {
             if (node == null) return true;
             if (node.val <= minVal || node.val >= maxVal) return false;
@@ -293,12 +293,12 @@ namespace DSACodeInterview
         }
 
         // Lowest Common Ancestor - O(n) time, O(h) space
-        public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q)
+        public TreeNode? LowestCommonAncestor(TreeNode? root, TreeNode p, TreeNode q)
         {
             if (root == null || root == p || root == q) return root;
 
-            TreeNode left = LowestCommonAncestor(root.left, p, q);
-            TreeNode right = LowestCommonAncestor(root.right, p, q);
+            TreeNode? left = LowestCommonAncestor(root.left, p, q);
+            TreeNode? right = LowestCommonAncestor(root.right, p, q);
 
             if (left != null && right != null) return root;
             return left ?? right;
