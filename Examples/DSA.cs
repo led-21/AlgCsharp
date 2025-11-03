@@ -1,4 +1,4 @@
-namespace DSA;
+namespace DSAExamples;
 
 // ==================== ARRAY PROBLEMS ====================
 public class ArrayProblems

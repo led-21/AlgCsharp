@@ -1,4 +1,4 @@
-﻿using DSA;
+﻿using DSAExamples;
 using SystemDesignExamples;
 
 Console.WriteLine("DSA Code Interview Examples");
